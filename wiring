@@ -1,0 +1,207 @@
+# Elements list:
+# --------------
+- ESP8266 DEV BOARD
+- Arduino Mega
+- RFID RC522
+- 4x3 Matrix Keypad
+- LCD 20x04 with I2C adapter
+- 16 relay module (low level trigger)
+- 8 bottle module, composed of:
+    - 1 valve 12V
+    - 1 pump 6v
+    - 1 weight sensor HX511
+- ALIM_12V
+- ALIM_6V
+
+# ------------------------------------------------------------------------------
+#                           ESP8266 DEV BOARD:
+# ------------------------------------------------------------------------------
+
+# Connection with RFID RC522:
+ESP8266.D1  --> RFID_RC522.RST
+ESP8266.D2  --> RFID_RC522.MISO
+ESP8266.D3  --> RFID_RC522.SCK
+ESP8266.D4  --> RFID_RC522.MOSI
+ESP8266.3V  --> RFID_RC522.3V
+ESP8266.GND --> RFID_RC522.GND
+ESP8266.D5  --> RFID_RC522.SDA
+
+# Connection with Arduino Mega:
+ESP8266.RX  --> ARDUINO_MEGA.D12
+ESP8266.TX  --> ARDUINO_MEGA.D13
+ESP8266.GND --> ARDUINO_MEGA.GND
+
+# ------------------------------------------------------------------------------
+#                               ARDUINO MEGA:
+# ------------------------------------------------------------------------------
+# Connection with 4x3 Matrix Keypad:
+# From left to right: PIN_0 to PIN_8 (PIN 0 and 8 not connected)
+ARDUINO_MEGA.D24    --> KEYPAD.PIN_1_COL2
+ARDUINO_MEGA.D25    --> KEYPAD.PIN_5_COL3
+ARDUINO_MEGA.D26    --> KEYPAD.PIN_2_ROW1
+ARDUINO_MEGA.D27    --> KEYPAD.PIN_6_ROW3
+ARDUINO_MEGA.D28    --> KEYPAD.PIN_3_COL1
+ARDUINO_MEGA.D29    --> KEYPAD.PIN_7_ROW2
+ARDUINO_MEGA.D30    --> KEYPAD.PIN_4_ROW4
+
+# Connection with I2C adapter for LCD 20x04:
+ARDUINO_MEGA.D20    --> LCD2004.SDA
+ARDUINO_MEGA.D21    --> LCD2004.SCL
+ARDUINO_MEGA.GND    --> LCD2004.GND
+ARDUINO_MEGA.5V     --> LCD2004.VCC
+
+# Connection with 16 Relay Module Low Level Trigger:
+ARDUINO_MEGA.D32    --> RELAYS.PIN_2
+ARDUINO_MEGA.D34    --> RELAYS.PIN_4
+ARDUINO_MEGA.D36    --> RELAYS.PIN_6
+ARDUINO_MEGA.D38    --> RELAYS.PIN_8
+ARDUINO_MEGA.D40    --> RELAYS.PIN_10
+ARDUINO_MEGA.D42    --> RELAYS.PIN_12
+ARDUINO_MEGA.D44    --> RELAYS.PIN_14
+ARDUINO_MEGA.D46    --> RELAYS.PIN_16
+ARDUINO_MEGA.5V     --> RELAYS.5V
+ARDUINO_MEGA.GND    --> RELAYS.GND
+
+# Connection with bottle modules:
+ARDUINO_MEGA.D2     --> BOTTLE_MODULE_1.SENSOR.SCK
+                        BOTTLE_MODULE_2.SENSOR.SCK
+                        BOTTLE_MODULE_3.SENSOR.SCK
+                        BOTTLE_MODULE_4.SENSOR.SCK
+                        BOTTLE_MODULE_5.SENSOR.SCK
+                        BOTTLE_MODULE_6.SENSOR.SCK
+                        BOTTLE_MODULE_7.SENSOR.SCK
+                        BOTTLE_MODULE_8.SENSOR.SCK
+ARDUINO_MEGA.GND    --> BOTTLE_MODULE_1.SENSOR.GND
+                        BOTTLE_MODULE_2.SENSOR.GND
+                        BOTTLE_MODULE_3.SENSOR.GND
+                        BOTTLE_MODULE_4.SENSOR.GND
+                        BOTTLE_MODULE_5.SENSOR.GND
+                        BOTTLE_MODULE_6.SENSOR.GND
+                        BOTTLE_MODULE_7.SENSOR.GND
+                        BOTTLE_MODULE_8.SENSOR.GND
+ARDUINO_MEGA.5V     --> BOTTLE_MODULE_1.SENSOR.VCC
+                        BOTTLE_MODULE_2.SENSOR.VCC
+                        BOTTLE_MODULE_3.SENSOR.VCC
+                        BOTTLE_MODULE_4.SENSOR.VCC
+                        BOTTLE_MODULE_5.SENSOR.VCC
+                        BOTTLE_MODULE_6.SENSOR.VCC
+                        BOTTLE_MODULE_7.SENSOR.VCC
+                        BOTTLE_MODULE_8.SENSOR.VCC
+ARDUINO_MEGA.D3     --> BOTTLE_MODULE_1.SENSOR.DT
+ARDUINO_MEGA.D4     --> BOTTLE_MODULE_2.SENSOR.DT
+ARDUINO_MEGA.D5     --> BOTTLE_MODULE_3.SENSOR.DT
+ARDUINO_MEGA.D6     --> BOTTLE_MODULE_4.SENSOR.DT
+ARDUINO_MEGA.D7     --> BOTTLE_MODULE_5.SENSOR.DT
+ARDUINO_MEGA.D8     --> BOTTLE_MODULE_6.SENSOR.DT
+ARDUINO_MEGA.D9     --> BOTTLE_MODULE_7.SENSOR.DT
+ARDUINO_MEGA.D10    --> BOTTLE_MODULE_8.SENSOR.DT
+
+# Connection with weight sensor glass:
+ARDUINO_MEGA.D11    --> WEIGHT_SENSOR_GLASS.DT
+ARDUINO_MEGA.D2     --> WEIGHT_SENSOR_GLASS.SCK
+ARDUINO_MEGA.GND    --> WEIGHT_SENSOR_GLASS.GND
+ARDUINO_MEGA.5V     --> WEIGHT_SENSOR_GLASS.VCC
+
+# ------------------------------------------------------------------------------
+#                               RELAYS BOARDS:
+# NC : Normally close terminal
+# NO : Normally open terminal
+# COM: Common terminal
+# ------------------------------------------------------------------------------
+# Connect all NO terminals for PUMPS:
+RELAYS.K1.NO        --> ALIM_6V.VCC
+RELAYS.K1.NO        --> RELAYS.K2.NO
+RELAYS.K2.NO        --> RELAYS.K3.NO
+RELAYS.K3.NO        --> RELAYS.K4.NO
+RELAYS.K4.NO        --> RELAYS.K5.NO
+RELAYS.K5.NO        --> RELAYS.K6.NO
+RELAYS.K6.NO        --> RELAYS.K7.NO
+RELAYS.K7.NO        --> RELAYS.K8.NO
+
+# Connect all NO terminals for VALVES:
+RELAYS.K9.NO        --> ALIM_12V.VCC
+RELAYS.K9.NO        --> RELAYS.K10.NO
+RELAYS.K10.NO       --> RELAYS.K11.NO
+RELAYS.K11.NO       --> RELAYS.K12.NO
+RELAYS.K12.NO       --> RELAYS.K13.NO
+RELAYS.K13.NO       --> RELAYS.K14.NO
+RELAYS.K14.NO       --> RELAYS.K15.NO
+RELAYS.K15.NO       --> RELAYS.K16.NO
+
+# Connect all PUMPS:
+RELAYS.K1.COM       --> BOTTLE_MODULE_1.PUMP.VCC
+RELAYS.K2.COM       --> BOTTLE_MODULE_2.PUMP.VCC
+RELAYS.K3.COM       --> BOTTLE_MODULE_3.PUMP.VCC
+RELAYS.K4.COM       --> BOTTLE_MODULE_4.PUMP.VCC
+RELAYS.K5.COM       --> BOTTLE_MODULE_5.PUMP.VCC
+RELAYS.K6.COM       --> BOTTLE_MODULE_6.PUMP.VCC
+RELAYS.K7.COM       --> BOTTLE_MODULE_7.PUMP.VCC
+RELAYS.K8.COM       --> BOTTLE_MODULE_8.PUMP.VCC
+
+# Connect all VALVES:
+RELAYS.K9.COM       --> BOTTLE_MODULE_1.VALVE.VCC
+RELAYS.K10.COM      --> BOTTLE_MODULE_2.VALVE.VCC
+RELAYS.K11.COM      --> BOTTLE_MODULE_3.VALVE.VCC
+RELAYS.K12.COM      --> BOTTLE_MODULE_4.VALVE.VCC
+RELAYS.K13.COM      --> BOTTLE_MODULE_5.VALVE.VCC
+RELAYS.K14.COM      --> BOTTLE_MODULE_6.VALVE.VCC
+RELAYS.K15.COM      --> BOTTLE_MODULE_7.VALVE.VCC
+RELAYS.K16.COM      --> BOTTLE_MODULE_8.VALVE.VCC
+
+# Ground all actuator:
+ALIM_6V.GND         --> BOTTLE_MODULE_1.PUMP.GND
+                        BOTTLE_MODULE_2.PUMP.GND
+                        BOTTLE_MODULE_3.PUMP.GND
+                        BOTTLE_MODULE_4.PUMP.GND
+                        BOTTLE_MODULE_5.PUMP.GND
+                        BOTTLE_MODULE_6.PUMP.GND
+                        BOTTLE_MODULE_7.PUMP.GND
+                        BOTTLE_MODULE_8.PUMP.GND
+
+ALIM_12V.GND        --> BOTTLE_MODULE_1.VALVE.GND
+                        BOTTLE_MODULE_2.VALVE.GND
+                        BOTTLE_MODULE_3.VALVE.GND
+                        BOTTLE_MODULE_4.VALVE.GND
+                        BOTTLE_MODULE_5.VALVE.GND
+                        BOTTLE_MODULE_6.VALVE.GND
+                        BOTTLE_MODULE_7.VALVE.GND
+                        BOTTLE_MODULE_8.VALVE.GND
+
+
+# ------------------------------------------------------------------------------
+#               RESUME : Multiple connection with other elements :
+# ------------------------------------------------------------------------------
+ARDUINO_MEGA.GND    --> RELAYS.GND
+                        LCD2004.GND
+                        ESP8266.GND
+                        WEIGHT_SENSOR_GLASS.GND
+                        BOTTLE_MODULE_1.SENSOR.GND
+                        BOTTLE_MODULE_2.SENSOR.GND
+                        BOTTLE_MODULE_3.SENSOR.GND
+                        BOTTLE_MODULE_4.SENSOR.GND
+                        BOTTLE_MODULE_5.SENSOR.GND
+                        BOTTLE_MODULE_6.SENSOR.GND
+                        BOTTLE_MODULE_7.SENSOR.GND
+                        BOTTLE_MODULE_8.SENSOR.GND
+
+ARDUINO_MEGA.5V     --> RELAYS.5V
+                        LCD2004.VCC
+                        WEIGHT_SENSOR_GLASS.VCC
+                        BOTTLE_MODULE_1.SENSOR.VCC
+                        BOTTLE_MODULE_2.SENSOR.VCC
+                        BOTTLE_MODULE_3.SENSOR.VCC
+                        BOTTLE_MODULE_4.SENSOR.VCC
+                        BOTTLE_MODULE_5.SENSOR.VCC
+                        BOTTLE_MODULE_6.SENSOR.VCC
+                        BOTTLE_MODULE_7.SENSOR.VCC
+                        BOTTLE_MODULE_8.SENSOR.VCC
+
+ARDUINO_MEGA.D2     --> BOTTLE_MODULE_1.SENSOR.SCK
+                        BOTTLE_MODULE_2.SENSOR.SCK
+                        BOTTLE_MODULE_3.SENSOR.SCK
+                        BOTTLE_MODULE_4.SENSOR.SCK
+                        BOTTLE_MODULE_5.SENSOR.SCK
+                        BOTTLE_MODULE_6.SENSOR.SCK
+                        BOTTLE_MODULE_7.SENSOR.SCK
+                        BOTTLE_MODULE_8.SENSOR.SCK
+                        WEIGHT_SENSOR_GLASS.SCK
